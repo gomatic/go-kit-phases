@@ -1,0 +1,1 @@
+This branch [adds](https://github.com/gomatic/go-kit-phases/compare/06-modified-main...07b-transports-jsonrpc-server-stubs) [a stubbed JSON RPC transport](../internal/api/transport/jsonrpc/server.go). 
