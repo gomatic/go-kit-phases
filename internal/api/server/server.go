@@ -25,4 +25,3 @@ func (s Instance) Executor(address string, endpoints endpoint.Set, logger log.Lo
 
 //
 func (s Instance) Interrupt(err error) {}
-
