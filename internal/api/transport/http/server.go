@@ -7,6 +7,7 @@ import (
 
 	"github.com/go-kit/kit/endpoint"
 	httptransport "github.com/go-kit/kit/transport/http"
+	"github.com/gomatic/go-kit-phases/api/moody"
 	apiendpoints "github.com/gomatic/go-kit-phases/internal/api/endpoint"
 	"github.com/gorilla/mux"
 )
@@ -45,27 +46,32 @@ func NewServer(endpoints apiendpoints.Set) http.Handler {
 
 //
 func decodeHTTPCreateRequest(_ context.Context, r *http.Request) (interface{}, error) {
-	panic("implement me")
+	req := &moody.Feelings{}
+	return req, json.NewDecoder(r.Body).Decode(req)
 }
 
 //
 func decodeHTTPRetrieveRequest(_ context.Context, r *http.Request) (interface{}, error) {
-	panic("implement me")
+	req := &moody.Query{}
+	return req, json.NewDecoder(r.Body).Decode(req)
 }
 
 //
 func decodeHTTPUpdateRequest(_ context.Context, r *http.Request) (interface{}, error) {
-	panic("implement me")
+	req := &moody.Feelings{}
+	return req, json.NewDecoder(r.Body).Decode(req)
 }
 
 //
 func decodeHTTPDeleteRequest(_ context.Context, r *http.Request) (interface{}, error) {
-	panic("implement me")
+	req := &moody.Feelings{}
+	return req, json.NewDecoder(r.Body).Decode(req)
 }
 
 //
 func decodeHTTPListRequest(_ context.Context, r *http.Request) (interface{}, error) {
-	panic("implement me")
+	req := &moody.Query{}
+	return req, json.NewDecoder(r.Body).Decode(req)
 }
 
 //

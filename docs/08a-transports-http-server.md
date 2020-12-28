@@ -1,0 +1,1 @@
+This branch [adds](https://github.com/gomatic/go-kit-phases/compare/07a-transports-http-server-stubs...08a-transports-http-server) [mock/static HTTP transport responses](../internal/api/transport/http/server.go). 
