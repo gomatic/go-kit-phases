@@ -8,26 +8,6 @@ import (
 )
 
 //
-type Set struct {
-	CreateEndpoint   endpoint.Endpoint
-	RetrieveEndpoint endpoint.Endpoint
-	UpdateEndpoint   endpoint.Endpoint
-	DeleteEndpoint   endpoint.Endpoint
-	ListEndpoint     endpoint.Endpoint
-}
-
-//
-func New(svc moody.SelfServer) Set {
-	return Set{
-		CreateEndpoint:   NewCreateEndpoint(svc),
-		RetrieveEndpoint: NewRetrieveEndpoint(svc),
-		UpdateEndpoint:   NewUpdateEndpoint(svc),
-		DeleteEndpoint:   NewDeleteEndpoint(svc),
-		ListEndpoint:     NewListEndpoint(svc),
-	}
-}
-
-//
 func NewCreateEndpoint(s moody.SelfServer) endpoint.Endpoint {
 	return func(ctx context.Context, request interface{}) (response interface{}, err error) {
 		return &moody.Overall{

@@ -1,0 +1,1 @@
+This is just preparing for the next relatively big refactor. Each transport now has interfaces that specifies how a transport decodes and encodes requests and responses. There will be similar interfaces for the client contract.
