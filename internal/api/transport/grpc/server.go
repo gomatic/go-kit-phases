@@ -6,6 +6,7 @@ import (
 	grpctransport "github.com/go-kit/kit/transport/grpc"
 	"github.com/gomatic/go-kit-phases/api/moody"
 	apiendpoints "github.com/gomatic/go-kit-phases/internal/api/endpoint"
+	"github.com/gomatic/go-kit-phases/internal/api/service"
 )
 
 //
@@ -50,76 +51,76 @@ type grpcServer struct {
 }
 
 //
-func (s *grpcServer) Create(_ context.Context, _ *moody.Feeling) (*moody.Overall, error) {
-	panic("implement me")
+func (s *grpcServer) Create(ctx context.Context, feelings *moody.Feeling) (*moody.Overall, error) {
+	return service.Self{}.Create(ctx, feelings)
 }
 
 //
-func (s *grpcServer) Retrieve(_ context.Context, _ *moody.Query) (*moody.Feeling, error) {
-	panic("implement me")
+func (s *grpcServer) Retrieve(ctx context.Context, request *moody.Query) (*moody.Feeling, error) {
+	return service.Self{}.Retrieve(ctx, request)
 }
 
 //
-func (s *grpcServer) Update(_ context.Context, _ *moody.Feeling) (*moody.Overall, error) {
-	panic("implement me")
+func (s *grpcServer) Update(ctx context.Context, feelings *moody.Feeling) (*moody.Overall, error) {
+	return service.Self{}.Update(ctx, feelings)
 }
 
 //
-func (s *grpcServer) Delete(_ context.Context, _ *moody.Feeling) (*moody.Feeling, error) {
-	panic("implement me")
+func (s *grpcServer) Delete(ctx context.Context, feelings *moody.Feeling) (*moody.Feeling, error) {
+	return service.Self{}.Delete(ctx, feelings)
 }
 
 //
-func (s *grpcServer) List(_ context.Context, _ *moody.Query) (*moody.Feelings, error) {
-	panic("implement me")
+func (s *grpcServer) List(ctx context.Context, request *moody.Query) (*moody.Feelings, error) {
+	return service.Self{}.List(ctx, request)
 }
 
 //
-func decodeGRPCCreateRequest(_ context.Context, _ interface{}) (interface{}, error) {
-	panic("implement me")
+func decodeGRPCCreateRequest(_ context.Context, grpcReq interface{}) (interface{}, error) {
+	return &moody.Feeling{}, nil
 }
 
 //
-func encodeGRPCCreateResponse(_ context.Context, _ interface{}) (interface{}, error) {
-	panic("implement me")
+func encodeGRPCCreateResponse(_ context.Context, response interface{}) (interface{}, error) {
+	return &moody.Overall{}, nil
 }
 
 //
-func decodeGRPCRetrieveRequest(_ context.Context, _ interface{}) (interface{}, error) {
-	panic("implement me")
+func decodeGRPCRetrieveRequest(_ context.Context, grpcReq interface{}) (interface{}, error) {
+	return &moody.Query{}, nil
 }
 
 //
-func encodeGRPCRetrieveResponse(_ context.Context, _ interface{}) (interface{}, error) {
-	panic("implement me")
+func encodeGRPCRetrieveResponse(_ context.Context, response interface{}) (interface{}, error) {
+	return &moody.Feeling{}, nil
 }
 
 //
-func decodeGRPCUpdateRequest(_ context.Context, _ interface{}) (interface{}, error) {
-	panic("implement me")
+func decodeGRPCUpdateRequest(_ context.Context, grpcReq interface{}) (interface{}, error) {
+	return &moody.Feeling{}, nil
 }
 
 //
-func encodeGRPCUpdateResponse(_ context.Context, _ interface{}) (interface{}, error) {
-	panic("implement me")
+func encodeGRPCUpdateResponse(_ context.Context, response interface{}) (interface{}, error) {
+	return &moody.Overall{}, nil
 }
 
 //
-func decodeGRPCDeleteRequest(_ context.Context, _ interface{}) (interface{}, error) {
-	panic("implement me")
+func decodeGRPCDeleteRequest(_ context.Context, grpcReq interface{}) (interface{}, error) {
+	return &moody.Feeling{}, nil
 }
 
 //
-func encodeGRPCDeleteResponse(_ context.Context, _ interface{}) (interface{}, error) {
-	panic("implement me")
+func encodeGRPCDeleteResponse(_ context.Context, response interface{}) (interface{}, error) {
+	return &moody.Feeling{}, nil
 }
 
 //
-func decodeGRPCListRequest(_ context.Context, _ interface{}) (interface{}, error) {
-	panic("implement me")
+func decodeGRPCListRequest(_ context.Context, grpcReq interface{}) (interface{}, error) {
+	return &moody.Query{}, nil
 }
 
 //
-func encodeGRPCListResponse(_ context.Context, _ interface{}) (interface{}, error) {
-	panic("implement me")
+func encodeGRPCListResponse(_ context.Context, response interface{}) (interface{}, error) {
+	return &moody.Feelings{}, nil
 }
