@@ -1,11 +1,12 @@
 package jsonrpc
 
 import (
-	"context"
-	"encoding/json"
-
 	"github.com/go-kit/kit/transport/http/jsonrpc"
 	apiendpoints "github.com/gomatic/go-kit-phases/internal/api/endpoint"
+	feeling "github.com/gomatic/go-kit-phases/internal/api/transform/feeling/server/jsonrpc"
+	feelings "github.com/gomatic/go-kit-phases/internal/api/transform/feelings/server/jsonrpc"
+	overall "github.com/gomatic/go-kit-phases/internal/api/transform/overall/server/jsonrpc"
+	query "github.com/gomatic/go-kit-phases/internal/api/transform/query/server/jsonrpc"
 )
 
 //
@@ -20,79 +21,29 @@ func NewServer(endpoints apiendpoints.Set) *jsonrpc.Server {
 func makeEndpointCodecMap(endpoints apiendpoints.Set) jsonrpc.EndpointCodecMap {
 	return jsonrpc.EndpointCodecMap{
 		"create": jsonrpc.EndpointCodec{
-			Endpoint: endpoints.CreateEndpoint,
-			Decode:   decodeCreateRequest,
-			Encode:   encodeCreateResponse,
+			Endpoint: endpoints.Create.ToEndpoint(),
+			Decode:   feeling.Request,
+			Encode:   overall.Response,
 		},
 		"retrieve": jsonrpc.EndpointCodec{
-			Endpoint: endpoints.RetrieveEndpoint,
-			Decode:   decodeRetrieveRequest,
-			Encode:   encodeRetrieveResponse,
+			Endpoint: endpoints.Retrieve.ToEndpoint(),
+			Decode:   query.Request,
+			Encode:   feeling.Response,
 		},
 		"update": jsonrpc.EndpointCodec{
-			Endpoint: endpoints.UpdateEndpoint,
-			Decode:   decodeUpdateRequest,
-			Encode:   encodeUpdateResponse,
+			Endpoint: endpoints.Update.ToEndpoint(),
+			Decode:   feeling.Request,
+			Encode:   overall.Response,
 		},
 		"delete": jsonrpc.EndpointCodec{
-			Endpoint: endpoints.DeleteEndpoint,
-			Decode:   decodeDeleteRequest,
-			Encode:   encodeDeleteResponse,
+			Endpoint: endpoints.Delete.ToEndpoint(),
+			Decode:   feeling.Request,
+			Encode:   feeling.Response,
 		},
 		"list": jsonrpc.EndpointCodec{
-			Endpoint: endpoints.ListEndpoint,
-			Decode:   decodeListRequest,
-			Encode:   encodeListResponse,
+			Endpoint: endpoints.List.ToEndpoint(),
+			Decode:   feeling.Request,
+			Encode:   feelings.Response,
 		},
 	}
-}
-
-//
-func decodeCreateRequest(_ context.Context, _ json.RawMessage) (interface{}, error) {
-	panic("implement me")
-}
-
-//
-func encodeCreateResponse(_ context.Context, _ interface{}) (json.RawMessage, error) {
-	panic("implement me")
-}
-
-//
-func decodeRetrieveRequest(_ context.Context, _ json.RawMessage) (interface{}, error) {
-	panic("implement me")
-}
-
-//
-func encodeRetrieveResponse(_ context.Context, _ interface{}) (json.RawMessage, error) {
-	panic("implement me")
-}
-
-//
-func decodeUpdateRequest(_ context.Context, _ json.RawMessage) (interface{}, error) {
-	panic("implement me")
-}
-
-//
-func encodeUpdateResponse(_ context.Context, _ interface{}) (json.RawMessage, error) {
-	panic("implement me")
-}
-
-//
-func decodeDeleteRequest(_ context.Context, _ json.RawMessage) (interface{}, error) {
-	panic("implement me")
-}
-
-//
-func encodeDeleteResponse(_ context.Context, _ interface{}) (json.RawMessage, error) {
-	panic("implement me")
-}
-
-//
-func decodeListRequest(_ context.Context, _ json.RawMessage) (interface{}, error) {
-	panic("implement me")
-}
-
-//
-func encodeListResponse(_ context.Context, _ interface{}) (json.RawMessage, error) {
-	panic("implement me")
 }

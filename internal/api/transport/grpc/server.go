@@ -7,35 +7,39 @@ import (
 	"github.com/gomatic/go-kit-phases/api/moody"
 	apiendpoints "github.com/gomatic/go-kit-phases/internal/api/endpoint"
 	"github.com/gomatic/go-kit-phases/internal/api/service"
+	feeling "github.com/gomatic/go-kit-phases/internal/api/transform/feeling/server/grpc"
+	feelings "github.com/gomatic/go-kit-phases/internal/api/transform/feelings/server/grpc"
+	overall "github.com/gomatic/go-kit-phases/internal/api/transform/overall/server/grpc"
+	query "github.com/gomatic/go-kit-phases/internal/api/transform/query/server/grpc"
 )
 
 //
 func NewServer(endpoints apiendpoints.Set) moody.SelfServer {
 	return &grpcServer{
 		create: grpctransport.NewServer(
-			endpoints.CreateEndpoint,
-			decodeGRPCCreateRequest,
-			encodeGRPCCreateResponse,
+			endpoints.Create.ToEndpoint(),
+			feeling.Request,
+			overall.Response,
 		),
 		retrieve: grpctransport.NewServer(
-			endpoints.RetrieveEndpoint,
-			decodeGRPCRetrieveRequest,
-			encodeGRPCRetrieveResponse,
+			endpoints.Retrieve.ToEndpoint(),
+			query.Request,
+			feeling.Response,
 		),
 		update: grpctransport.NewServer(
-			endpoints.UpdateEndpoint,
-			decodeGRPCUpdateRequest,
-			encodeGRPCUpdateResponse,
+			endpoints.Update.ToEndpoint(),
+			feeling.Request,
+			overall.Response,
 		),
 		delete: grpctransport.NewServer(
-			endpoints.DeleteEndpoint,
-			decodeGRPCDeleteRequest,
-			encodeGRPCDeleteResponse,
+			endpoints.Delete.ToEndpoint(),
+			feeling.Request,
+			feeling.Response,
 		),
 		list: grpctransport.NewServer(
-			endpoints.ListEndpoint,
-			decodeGRPCListRequest,
-			encodeGRPCListResponse,
+			endpoints.List.ToEndpoint(),
+			query.Request,
+			feelings.Response,
 		),
 	}
 }
@@ -73,54 +77,4 @@ func (s *grpcServer) Delete(ctx context.Context, feelings *moody.Feeling) (*mood
 //
 func (s *grpcServer) List(ctx context.Context, request *moody.Query) (*moody.Feelings, error) {
 	return service.Self{}.List(ctx, request)
-}
-
-//
-func decodeGRPCCreateRequest(_ context.Context, grpcReq interface{}) (interface{}, error) {
-	return &moody.Feeling{}, nil
-}
-
-//
-func encodeGRPCCreateResponse(_ context.Context, response interface{}) (interface{}, error) {
-	return &moody.Overall{}, nil
-}
-
-//
-func decodeGRPCRetrieveRequest(_ context.Context, grpcReq interface{}) (interface{}, error) {
-	return &moody.Query{}, nil
-}
-
-//
-func encodeGRPCRetrieveResponse(_ context.Context, response interface{}) (interface{}, error) {
-	return &moody.Feeling{}, nil
-}
-
-//
-func decodeGRPCUpdateRequest(_ context.Context, grpcReq interface{}) (interface{}, error) {
-	return &moody.Feeling{}, nil
-}
-
-//
-func encodeGRPCUpdateResponse(_ context.Context, response interface{}) (interface{}, error) {
-	return &moody.Overall{}, nil
-}
-
-//
-func decodeGRPCDeleteRequest(_ context.Context, grpcReq interface{}) (interface{}, error) {
-	return &moody.Feeling{}, nil
-}
-
-//
-func encodeGRPCDeleteResponse(_ context.Context, response interface{}) (interface{}, error) {
-	return &moody.Feeling{}, nil
-}
-
-//
-func decodeGRPCListRequest(_ context.Context, grpcReq interface{}) (interface{}, error) {
-	return &moody.Query{}, nil
-}
-
-//
-func encodeGRPCListResponse(_ context.Context, response interface{}) (interface{}, error) {
-	return &moody.Feelings{}, nil
 }
