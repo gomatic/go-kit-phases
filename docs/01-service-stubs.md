@@ -1,0 +1,1 @@
+This branch [adds](https://github.com/gomatic/go-kit-phases/compare/00-init...01-service-stubs) [a stubbed-implementation](../internal/api/service/service.go) of the [gRPC service](../api/moody/self.proto). 
