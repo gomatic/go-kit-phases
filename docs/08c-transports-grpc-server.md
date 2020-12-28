@@ -1,0 +1,1 @@
+This branch [adds](https://github.com/gomatic/go-kit-phases/compare/07c-transports-grpc-server-stubs...08c-transports-grpc-server) [mock/static gRPC transport responses](../internal/api/transport/grpc/server.go). 
