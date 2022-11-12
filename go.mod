@@ -28,7 +28,6 @@ require (
 )
 
 require (
-	github.com/go-kit/log v0.2.0
 	github.com/golang-jwt/jwt/v4 v4.0.0
 	github.com/gorilla/mux v1.6.2
 	github.com/oklog/oklog v0.3.2
