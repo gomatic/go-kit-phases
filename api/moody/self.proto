@@ -1,0 +1,127 @@
+syntax = "proto3";
+
+package moody;
+
+option go_package = ".;moody";
+
+service Self {
+  rpc Create (Feeling) returns (Overall) {
+  }
+  rpc Retrieve (Query) returns (Feeling) {
+  }
+  rpc Update (Feeling) returns (Overall) {
+  }
+  rpc Delete (Feeling) returns (Feeling) {
+  }
+  rpc List (Query) returns (Complicated) {
+  }
+}
+
+message Feeling {
+  Enjoyment enjoyment = 1;
+  Anger anger = 2;
+  Fear fear = 3;
+  Sadness sadness = 4;
+  Disgust disgust = 5;
+  uint64 date = 10;
+}
+message Overall {
+  uint64 date = 1;
+  double average = 2;
+}
+message Query {
+  Feeling feeling = 1;
+  Overall overall = 2;
+}
+message Complicated {
+  repeated Feeling feeling = 1;
+}
+
+message Anger {
+  enum Feeling {
+    ANNOYED = 0;
+    FRUSTRATED = 1;
+    PEEVED = 2;
+    CONTRARY = 3;
+    BITTER = 4;
+    INFURIATED = 5;
+    IRRITATED = 6;
+    MAD = 7;
+    CHEATED = 8;
+    VENGEFUL = 9;
+    INSULTED = 10;
+  }
+  Feeling feeling = 1;
+  double level = 2;
+}
+
+message Fear {
+  enum Feeling {
+    WORRIED = 0;
+    DOUBTFUL = 1;
+    NERVOUS = 2;
+    ANXIOUS = 3;
+    TERRIFIED = 4;
+    PANICKED = 5;
+    HORRIFIED = 6;
+    DESPERATE = 7;
+    CONFUSED = 8;
+    STRESSED = 9;
+  }
+  Feeling feeling = 1;
+  double level = 2;
+}
+
+message Sadness {
+  enum Feeling {
+    LONELY = 0;
+    HEARTBROKEN = 1;
+    GLOOMY = 2;
+    DISAPPOINTED = 3;
+    HOPELESS = 4;
+    GRIEVED = 5;
+    UNHAPPY = 6;
+    LOST = 7;
+    TROUBLED = 8;
+    RESIGNED = 9;
+    MISERABLE = 10;
+  }
+  Feeling feeling = 1;
+  double level = 2;
+}
+
+message Disgust {
+  enum Feeling {
+    DISLIKE = 0;
+    REVULSION = 1;
+    LOATHING = 2;
+    DISAPPROVING = 4;
+    OFFENDED = 5;
+    HORRIFIED = 6;
+    UNCOMFORTABLE = 7;
+    NAUSEATED = 8;
+    DISTURBED = 9;
+    WITHDRAWAL = 10;
+    AVERSION = 11;
+  }
+  Feeling feeling = 1;
+  double level = 2;
+}
+
+message Enjoyment {
+  enum Feeling {
+    HAPPINESS = 0;
+    LOVE = 1;
+    RELIEF = 2;
+    CONTENTMENT = 3;
+    AMUSEMENT = 4;
+    JOY = 5;
+    PRIDE = 6;
+    EXCITEMENT = 7;
+    PEACE = 8;
+    SATISFACTION = 9;
+    COMPASSION = 10;
+  }
+  Feeling feeling = 1;
+  double level = 2;
+}
