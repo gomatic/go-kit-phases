@@ -4,6 +4,7 @@ go 1.20
 
 require (
 	github.com/go-kit/kit v0.12.0
+	github.com/go-kit/log v0.2.0
 	github.com/golang/protobuf v1.5.2
 	google.golang.org/grpc v1.53.0
 	google.golang.org/protobuf v1.28.1
