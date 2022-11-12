@@ -7,23 +7,13 @@ import (
 	"net/http"
 
 	"github.com/go-kit/kit/endpoint"
+	"github.com/gomatic/go-kit-phases/pkg/errors"
 )
-
-//
-func errorEncoder(_ context.Context, err error, w http.ResponseWriter) {
-	w.WriteHeader(http.StatusInternalServerError)
-	_ = json.NewEncoder(w).Encode(errorWrapper{Error: err.Error()})
-}
-
-//
-type errorWrapper struct {
-	Error string `json:"error"`
-}
 
 //
 func EncodeHTTPGenericResponse(ctx context.Context, w http.ResponseWriter, response interface{}) error {
 	if f, ok := response.(endpoint.Failer); ok && f.Failed() != nil {
-		errorEncoder(ctx, f.Failed(), w)
+		errors.ErrorEncoder(ctx, f.Failed(), w)
 		return nil
 	}
 	w.Header().Set("Content-Type", "application/json; charset=utf-8")
@@ -37,7 +27,7 @@ func Marshaller(i interface{}, err error) (json.RawMessage, error) {
 	}
 	b, err := json.Marshal(i)
 	if err != nil {
-		return nil, fmt.Errorf("couldn't marshal response: %w", err)
+		return nil, fmt.Errorf("couldn't marshal %T: %w", i, err)
 	}
 	return b, nil
 }

@@ -1,1 +1,1 @@
-04-endpoints-stubs.md
+05-endpoints-mock-responses.md
